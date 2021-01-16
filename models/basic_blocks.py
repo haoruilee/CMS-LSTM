@@ -1,6 +1,5 @@
 ﻿import torch
 from torch import nn
-
 from torch.nn import Module, Conv2d, Sigmoid, Tanh, ModuleList
 
 __all__ = ['SE_Block']
@@ -9,8 +8,6 @@ __all__ = ['SE_Block']
 def INF(B, H, W):
     return -torch.diag(torch.tensor(float("inf")).cuda().repeat(H), 0).unsqueeze(0).repeat(B * W, 1, 1)
 
-
-# ---------------------------------------- SE block
 
 class _seblock(Module):
     def __init__(self, in_dim, scale=1, ):
@@ -104,7 +101,7 @@ class SE_Block(Module):
     def __init__(self, in_dim, img_size):
         super(SE_Block, self).__init__()
 
-        sizes = [1, 2, 4]  # divide 16*16 img into 16*16, 8*8*4, 4*4*16, etc.
+        sizes = [1, 2, 4]  # divide 16*16 feature map into 16*16*1, 8*8*4, 4*4*16, etc.
 
         self.group = len(sizes)
         self.stages = []
@@ -148,17 +145,12 @@ class SE_Block(Module):
         return seblock(in_dim, size)
 
     def forward(self, h_cur, m_cur):
-        # batch channel h 2w
         feats = torch.cat([h_cur, m_cur], dim=-1)
-
         priors = [stage(feats) for stage in self.stages]
-
         context = torch.cat(priors, dim=1)
-
         output = self.conv_bn(context)
 
         z_h, z_m = torch.split(output, output.shape[-1] // 2, -1)
-
         z = self.w_z(torch.cat([z_h, z_m], dim=1))
 
         z2h = self.w_z2h(z)  # [b 3*c h w]
