@@ -35,7 +35,7 @@ Extracting variation and spatiotemporal features via limited frames remains an u
 ## Pre-trained Models and Datasets
 Pretrained Model will be released soon!
 
-Dataset for Moving MNIST is avliable in:
+Dataset for Moving MNIST is avilliable in:
 
 For train dataset:
 
@@ -48,8 +48,18 @@ http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy
 ## Setup
 All code is developed and tested on a Nvidia RTX2080Ti the following environment.
 
-- Python3.8.5
+- Python 3.8.5
+- h5py 2.10.0
+- imageio 2.9.0
+- numpy 1.19.4
+- opencv-python 4.4.0.46
+- pandas 1.1.5
+- pillow 8.0.1
+- scikit-image 0.17.2
+- scipy 1.5.4
 - torch 1.7.1
+- torchvision 0.8.2
+- tqdm 4.51.0
 
 ## Train
 Use the `scripts/train.sh` script to train the model. To train the default model on Moving MNIST simply use:
