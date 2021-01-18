@@ -2,17 +2,13 @@
 from torch import nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-
-from tensorboardX import SummaryWriter
-
 import os
-
 import numpy as np
-import random
 import cv2
 from tqdm import tqdm
 from models import get_convrnn_model
 import utils
+from tensorboardX import SummaryWriter
 
 
 class MSEL1Loss(nn.Module):
@@ -204,8 +200,6 @@ class FPTrainer():
             masks.append(mask)
         return x, reverse_x, masks
 
-    # self.x = [x.clone().cuda() for x in self.x]
-
     def forward(self, x, mask):
         gen_ims = []
         x_gen = self.model(x[0], init_hidden=True)
@@ -224,7 +218,7 @@ class FPTrainer():
         images = torch.stack(x[2:], 1)
 
         loss = self.criterion(gen_ims, images)
-        loss /= 2.0  # for consistency with tensorflow
+        loss /= 2.0
         return loss
 
     def save_checkpoint(self, checkpoint, network_label, epoch_label):
@@ -290,11 +284,10 @@ class FPTrainer():
         total_index = 0
 
         describe = '[Testing]:Epoch ' + str(epoch)
-        # pbar = tqdm(total=len(self.valid_loader), desc = describe)
         pbar = tqdm(total=len(self.test_loader), desc=describe)
 
         for batch in self.test_loader:
-            # for batch in self.valid_loader:
+            # for batch in self.test_loader:
             x = utils.normalize_data(self.opt, self.dtype, batch)
             rec += self.evaluation(x)
             index += 1
@@ -439,16 +432,12 @@ class FPTrainer():
         self.optimizer.zero_grad()
         self.loss_1 = self.forward(x, mask)
 
-        # with amp.scale_loss(self.loss_1, self.optimizer) as scaled_loss:
-        #     scaled_loss.backward()
-
         self.loss_1.backward()
         self.optimizer.step()
 
         self.optimizer.zero_grad()
         self.loss_2 = self.forward(x_rev, mask)
-        # with amp.scale_loss(self.loss_2, self.optimizer) as scaled_loss:
-        #     scaled_loss.backward()
+
         self.loss_2.backward()
         self.optimizer.step()
 
