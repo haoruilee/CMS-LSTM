@@ -1,24 +1,10 @@
 import torch
-import torch.nn as nn
-import torch.backends.cudnn as cudnn
 import argparse
+import random
+from trainers import FPTrainer
 import os
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
-
-import random
-
-import cv2
-from datetime import datetime
-import time
-
-from trainers import FPTrainer
-
-import warnings
-
-warnings.filterwarnings('ignore')
-
-# CUDA_VISIBLE_DEVICES=3 python train.py --data_root ../code/data/Moving_MNIST --epoch_size 200 --model convlstm --batch_size 8
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--lr', default=0.001, type=float, help='learning rate')
@@ -82,36 +68,7 @@ torch.cuda.manual_seed_all(opt.seed)
 print(opt)
 
 trainer = FPTrainer(opt)
-# --------- initalize model -----------------------------------
-# torch.backends.cudnn.benchmark = True
-# cudnn.benchmark = True
-# cudnn.fastest = True
 
-
-# --------- plot prediction ------------------------------------
-'''
-def plot_pred(x, epoch):
-
-    gen_seq = []
-    gen_seq.append(x[0])
-    rec_loss = model.evaluation(x)
-
-    for i in range(1, opt.seq_len + opt.pre_len):
-        if i < opt.seq_len:
-            gen_seq.append(x[i])
-        else:
-            gen_seq.append(model.preds[i].detach())
-
-    to_plot = []
-    nrow = min(opt.batch_size, 10)
-    for i in range(nrow):
-        row = []
-        for t in range(opt.seq_len + opt.pre_len):
-            row.append(gen_seq[t][i])
-        to_plot.append(row)
-    fname = '%s/pred/pre_%d.png' % (opt.log_dir, epoch)
-    utils.save_tensors_image(fname, to_plot)
-'''
 # --------- training loop ------------------------------------
 if __name__ == '__main__':
 
