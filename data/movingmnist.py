@@ -1,9 +1,7 @@
 # -- coding: utf-8 --
 import gzip
-import math
 import numpy as np
 import os
-from PIL import Image
 import random
 import torch
 import torch.utils.data as data
