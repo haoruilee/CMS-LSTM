@@ -22,7 +22,6 @@ def load_dataset(opt):
         valid_data = TaxiBJ(valid_path, False)
         test_data = TaxiBJ(test_path, False)
 
-
     else:
         raise NameError('Got unsupported dataset: {}'.format(opt.dataset))
 
@@ -48,21 +47,16 @@ def normalize_data(opt, dtype, sequence):
 
 
 def mse_metric(x1, x2):
-    # err = np.sum((x1 - x2) ** 2)
     mse = np.square(x1 - x2).sum()
-    # err /= float(x1.shape[0] * x1.shape[1] * x1.shape[2])
     return mse
 
 
 def mae_metric(x1, x2):
     mae = np.sum(np.absolute(x1 - x2))
-
     return mae
 
 
 def sharp_metric(x):
-    # x = np.maximum(x, 0)
-    # x = np.minimum(x, 1)
     x = np.transpose(x, [1, 2, 0])
     x = np.uint8(x * 255)
     sharp = np.max(cv2.convertScaleAbs(cv2.Laplacian(x, 3)))
@@ -106,7 +100,6 @@ def batch_mae_frame_float(gen_frames, gt_frames):
 
 
 def batch_psnr(gen_frames, gt_frames):
-    # [batch, width, height]
     x = np.int32(gen_frames)
     y = np.int32(gt_frames)
     num_pixels = float(np.size(gen_frames[0]))
@@ -152,8 +145,6 @@ def reshape_patch(images, patch_size):
     nc = images.size(1)
     height = images.size(2)
     weight = images.size(3)
-    # x, bs, nc, height, weight
-    # print(images.shape)
     x = images.reshape(bs, nc, int(height / patch_size), patch_size, int(weight / patch_size), patch_size)
     x = x.transpose(2, 5)
     x = x.transpose(4, 5)
@@ -176,6 +167,16 @@ def reshape_patch_back(images, patch_size):
 
 
 def get_scheduler(optimizer, opt, t_max):
+    """Return a learning rate scheduler
+    Parameters:
+        optimizer          -- the optimizer of the network
+        opt (option class) -- stores all the experiment flags; needs to be a subclass of BaseOptions.
+                              opt.lr_policy is the name of learning rate policy: linear | step | plateau | cosine
+    For 'linear', we keep the same learning rate for the first <opt.niter> epochs
+    and linearly decay the rate to zero over the next <opt.niter_decay> epochs.
+    For other schedulers (step, plateau, and cosine), we use the default PyTorch schedulers.
+    See https://pytorch.org/docs/stable/optim.html for more details.
+    """
     if opt.lr_policy == 'linear':
         def lambda_rule(epoch):
             lr_l = 1.0 - max(0, epoch + opt.epoch_count - opt.niter) / float(opt.niter_decay + 1)
