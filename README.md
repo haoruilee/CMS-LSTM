@@ -17,16 +17,14 @@ Extracting variation and spatiotemporal features via limited frames remains an u
         <th width="100">SA-LSTM</th>
       </tr>
     </table>
-    
-</div>
-<img height="100" width="100" src="results/gt1.gif">
+    <img height="100" width="100" src="results/gt1.gif">
     <img height="100" width="100" src="results/CMS-LSTM_pd1.gif">
     <img height="100" width="100" src="results/PredRNN_pd1.gif">
     <img height="100" width="100" src="results/PredRNN++_pd1.gif">
     <img height="100" width="100" src="results/MIM_pd1.gif">
     <img height="100" width="100" src="results/SA-ConvLSTM_pd1.gif">
-
-  <img height="100" width="100" src="results/gt8.gif">
+</div>
+    <img height="100" width="100" src="results/gt8.gif">
     <img height="100" width="100" src="results/CMS-LSTM_pd8.gif">
     <img height="100" width="100" src="results/PredRNN_pd8.gif">
     <img height="100" width="100" src="results/PredRNN++_pd8.gif">
