@@ -24,12 +24,15 @@ Extracting variation and spatiotemporal features via limited frames remains an u
     <img height="100" width="100" src="results/MIM_pd1.gif">
     <img height="100" width="100" src="results/SA-ConvLSTM_pd1.gif">
 </div>
+<div>
     <img height="100" width="100" src="results/gt8.gif">
     <img height="100" width="100" src="results/CMS-LSTM_pd8.gif">
     <img height="100" width="100" src="results/PredRNN_pd8.gif">
     <img height="100" width="100" src="results/PredRNN++_pd8.gif">
     <img height="100" width="100" src="results/MIM_pd8.gif">
-    <img height="100" width="100" src="results/SA-ConvLSTM_pd8.gif">    
+    <img height="100" width="100" src="results/SA-ConvLSTM_pd8.gif">
+</div>
+
 
 ## Datasets
 <!-- ## Pre-trained Models and Datasets -->
