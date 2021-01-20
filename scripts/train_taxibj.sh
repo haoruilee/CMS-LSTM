@@ -3,7 +3,7 @@ cd .. \
 python train.py \
 --model 'cmslstm' \
 --dataset 'taxibj' \
---data_root './data/Moving_MNIST' \
+--data_root './data/TaxiBJ' \
 --lr 0.001 \
 --batch_size 8 \
 --epoch_size 200 \
