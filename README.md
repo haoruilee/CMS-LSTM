@@ -59,29 +59,29 @@ All code is developed and tested on a Nvidia RTX2080Ti the following environment
 ## Code Architecture
 ```
 CMS-LSTM.
-©¦  README.md
-©¦  test.py
-©¦  train.py
-©¦  utils.py
-©¦
-©À©¤data
-©¦  ©¦  movingmnist.py
-©¦  ©¸©¤ taxibj.py
-©¦
-©À©¤logs
-©À©¤models
-©¦  ©¦  basic_blocks.py
-©¦  ©¦  CMSLSTM.py
-©¦  ©¸©¤ __init__.py
-©¦
-©¦
-©À©¤scripts
-©¦      train_mmnist.sh
-©¦      train_taxibj.sh
-©¦
-©¸©¤trainers
-   ©¦  frame_prediction_trainer.py
-   ©¸©¤ __init__.py
+â”‚  README.md
+â”‚  test.py
+â”‚  train.py
+â”‚  utils.py
+â”‚
+â”œâ”€data
+â”‚  â”‚  movingmnist.py
+â”‚  â””â”€ taxibj.py
+â”‚
+â”œâ”€logs
+â”œâ”€models
+â”‚  â”‚  basic_blocks.py
+â”‚  â”‚  CMSLSTM.py
+â”‚  â””â”€ __init__.py
+â”‚
+â”‚
+â”œâ”€scripts
+â”‚      train_mmnist.sh
+â”‚      train_taxibj.sh
+â”‚
+â””â”€trainers
+   â”‚  frame_prediction_trainer.py
+   â””â”€ __init__.py
 
 ```
 
