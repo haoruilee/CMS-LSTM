@@ -159,8 +159,17 @@ python train.py \
 --data_threads 4 \
 --optimizer adamw
 ```
-<!-- ## BibTeX
-TODO -->
+## BibTeX
+If you find this repository useful in your research, please consider citing the following paper:
+```
+@article{chai2021cms,
+  title={CMS-LSTM: Context-Embedding and Multi-Scale Spatiotemporal-Expression LSTM for Video Prediction},
+  author={Chai, Zenghao and Yuan, Chun and Lin, Zhihui and Bai, Yunpeng},
+  journal={arXiv preprint arXiv:2102.03586},
+  year={2021}
+}
+```
+
 
 ## Questions
 If you have any questions or problems regarding the code or paper do not hesitate to contact us.
